@@ -159,6 +159,28 @@ Page({
     }
   },
 
+  formReset:function(){
+    console.info("reset");
+    var me = this;
+    var newItems = [
+      { name: 'define', value: '默认分类', checked: 'true' },
+      { name: 'food', value: '美食分类' },
+      { name: 'dress', value: '美妆分类' },
+    ];
+    var newFilter = [
+      { name: 'define', value: '普通', checked: 'true' },
+      { name: 'light', value: '白皙' },
+      { name: 'black', value: '慕斯' },
+    ];
+    me.setData(
+      {
+        items: newItems
+        , filter: newFilter
+      }
+    );
+
+  },
+
 
   checkboxChange: function (e) {
 
@@ -219,6 +241,8 @@ Page({
     var videoCategory = me.data.boxValue;
     var videoFilter = me.data.fileterBoxValue;
    //如果用户没有点击任何的选项卡的时候 则不允许用户进行上传
+    console.info(1,e);
+    console.info(2,me);
     if (videoCategory == '') {
       wx.showToast({
         title: '请选择一个视频分类',
@@ -257,6 +281,7 @@ Page({
     var userInfo = app.getGlobalUserInfo();
     var serverUrl = app.serverUrl;
     var userId = userInfo.id;
+    return;
     // 开始上传
     wx.uploadFile({
       url: serverUrl + "/video/upload",

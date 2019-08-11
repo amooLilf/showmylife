@@ -1,5 +1,5 @@
 <view>
-  <form bindsubmit='upload'>
+  <form bindsubmit='upload' bindreset="formReset">
     <h2 class="loginLabel">请添加背景音乐</h2>
     <radio-group name="bgmId">
       <scroll-view scroll-y style="height: 350px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
