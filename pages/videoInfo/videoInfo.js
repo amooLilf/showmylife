@@ -364,6 +364,7 @@ Page({
       var user = app.getGlobalUserInfo();
       wx.getSystemInfo({
         success: function (result) {
+          console.info(result)
           //选项集合
           let itemList;
           if (result.platform == 'android') {
