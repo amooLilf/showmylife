@@ -6,7 +6,7 @@
   </view>
   <view class='imgList' bindtap='jump' data-id="{{item.label}}">
     <view>
-      <image class="banner_image" mode='scaleToFill' src='{{serverUrl}}{{item.imageUrl}}' data-type="imgUrls" data-img="{{item.imageUrl}}" data-index="0"></image>
+      <image class="banner_image" mode='scaleToFill' src='{{item.imageUrl}}' data-type="imgUrls" data-img="{{item.imageUrl}}" data-index="0"></image>
     </view>
   </view>
   <view class="jump" data-id="{{item.label}}"  bindtap='jump'>查看详情</view>

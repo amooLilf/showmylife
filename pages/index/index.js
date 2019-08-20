@@ -74,12 +74,11 @@ Page({
         var videoList = res.data.data.rows;
         //遍历视频信息 将face_image为null的视频头像改为默认头像
         for (var i = 0; i < videoList.length; i++) {
-          if (videoList[i].face_image == null || videoList[i].face_image == undefined || videoList[i].face_image == '') {
+          if (videoList[i].face_image == null || videoList[i].face_image == undefined || videoList[i].face_image ==             '') {
             videoList[i].face_image = "../resource/images/noneface.png";
           }
           else {
-            var serverUrl = app.serverUrl;
-            videoList[i].face_image = serverUrl + videoList[i].face_image;
+            videoList[i].face_image = videoList[i].face_image;
           }
         }
         var newVideoList = me.data.videoList;
@@ -118,9 +117,11 @@ Page({
     var me = this;
     var videoList = me.data.videoList;
     var arrindex = e.target.dataset.arrindex;
-    var videoInfo = JSON.stringify(videoList[arrindex]);//获取视频信息对象
+    var videoInfo = videoList[arrindex];//获取视频信息对象
+    // var tagetUrl = "../videoInfo/videoInfo?videoInfo=" + videoInfo;
+    var tagetUrl = "../videoInfo/videoInfo?id=" + videoInfo.id;
     wx.navigateTo({
-      url: '../videoInfo/videoInfo?videoInfo=' + videoInfo,
+      url: tagetUrl,
     })
   }
 

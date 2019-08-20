@@ -13,7 +13,8 @@ App({
   // https://www.lotcloudy.com/scetc-show-videos-mini-api-0.0.1-SNAPSHOT,
   // https://www.lotcloudy.com/scetc-show-videos-mini-api-0.0.1-SNAPSHOT,
   // http://localhost:8080/scetc-show-videos-mini-api/
-  serverUrl: "https://www.lotcloudy.com/scetc-show-videos-mini-api-0.0.1-SNAPSHOT/",
+  // serverUrl: "https://www.lotcloudy.com/scetc-show-videos-mini-api-0.0.1-SNAPSHOT/",
+  serverUrl: "http://localhost:8080/",
   userInfo: null,
   //switchTab 不能携带参数，只好将参数作为全局变量来进行保存
   //内网ip的方式访问

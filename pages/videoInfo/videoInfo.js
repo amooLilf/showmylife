@@ -95,63 +95,72 @@ Page({
   // },
   onLoad: function (params) {
     var me = this;
+    var serverUrl = app.serverUrl;
     me.videoCtx = wx.createVideoContext('myVideo', me);
     var realUrlParam = app.globalData.realUrlParam;
     if (realUrlParam != '' && realUrlParam != null && realUrlParam != undefined) {
-      videoInfo = JSON.parse(realUrlParam);
+      var videoInfo = JSON.parse(realUrlParam);
       app.globalData.realUrl = null;
       app.globalData.realUrlParam = null;
     } else {
-      var videoInfo = JSON.parse(params.videoInfo);
-    }
-    //解决高和宽的问题
-    //横屏和竖屏的问题。
-    var height = videoInfo.videoHeight;
-    var width = videoInfo.videoWidth;
-    var cover = 'cover';
-    if (width > height) {
-      cover = '';
-    }
-    me.setData({
-      videoId: videoInfo.id,
-      src: app.serverUrl + videoInfo.videoPath,
-      imagesrc: videoInfo.face_image,
-      videoInfo: videoInfo,
-      cover: cover,
-    })
-    var serverUrl = app.serverUrl;
-    var loginUserId = '';
-    var user = app.getGlobalUserInfo();
-    if (user != null && user != undefined && user != '') {
-      loginUserId = user.id;
-    }
-    wx.request({
-      url: serverUrl + '/user/queryPublisher?loginUserId=' + user.id + '&videoId=' + videoInfo.id +
-        '&publisherUserId=' + videoInfo.userId,
-      method: 'post',
-      success: function (res) {
-        me.setData({
-          userLikeVideo: res.data.data.userLikeVideo,
-        })
-      }
-    })
-    //查询视频id的 所有评论
-    wx.request({
-      url: serverUrl + '/video/queryCommentsByVideoId?videoId=' + videoInfo.id,
-      method: 'post',
-      success: function (resp) {
-        var CommentList = resp.data.data;
-        for (var i = 0; i < CommentList.length; i++) {
-          CommentList[i]["createTime"] = util.formatDate(CommentList[i]["createTime"]);
+      wx.request({
+        url: serverUrl + '/video/info?id=' + params.id ,
+        method: 'post',
+        success: function (res) {
+          console.info(222, res.data.data);
+          if (res.data.status){
+            var videoInfo = res.data.data;
+            //解决高和宽的问题
+            //横屏和竖屏的问题。
+            var height = videoInfo.videoHeight;
+            var width = videoInfo.videoWidth;
+            var cover = 'cover';
+            if (width > height) {
+              cover = '';
+            }
+            me.setData({
+              videoId: videoInfo.id,
+              src: videoInfo.videoPath,
+              imagesrc: videoInfo.face_image,
+              videoInfo: videoInfo,
+              cover: cover,
+            })
+
+            var loginUserId = '';
+            var user = app.getGlobalUserInfo();
+            if (user != null && user != undefined && user != '') {
+              loginUserId = user.id;
+            }
+            wx.request({
+              url: serverUrl + '/user/queryPublisher?loginUserId=' + user.id + '&videoId=' + videoInfo.id +
+                '&publisherUserId=' + videoInfo.userId,
+              method: 'post',
+              success: function (res) {
+                me.setData({
+                  userLikeVideo: res.data.data.userLikeVideo,
+                })
+              }
+            })
+            //查询视频id的 所有评论
+            wx.request({
+              url: serverUrl + '/video/queryCommentsByVideoId?videoId=' + videoInfo.id,
+              method: 'post',
+              success: function (resp) {
+                var CommentList = resp.data.data;
+                for (var i = 0; i < CommentList.length; i++) {
+                  CommentList[i]["createTime"] = util.formatDate(CommentList[i]["createTime"]);
+                }
+                //将获得的评论
+                me.setData({
+                  CommentList: resp.data.data
+                })
+              }
+            })
+          }
+          
         }
-        //将获得的评论
-        me.setData({
-          CommentList: resp.data.data
-        })
-
-      }
-
-    })
+      })
+    }
   },
 
   /**
