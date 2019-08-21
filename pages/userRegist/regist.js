@@ -37,7 +37,7 @@ Page({
 
           if (status == 200) {
             wx.showToast({
-              title: '注册成功啦~~',
+              title: '注册成功!请重新登陆',
               icon: 'none',
               duration: 3000
             })

@@ -27,8 +27,7 @@
 </view>
 
 <view class="saySthView">
-  <input name="commentContent" class="saySth" placeholder="{{placeholder}}" confirm-type="send" bindconfirm="sendComment" focus='{{commentFocus}}' value='{{contentValue}}' data-replyFatherCommentId='{{replyFatherCommentId}}' data-replyToUserId='{{replyToUserId}}'
-  />
+  <input name="commentContent" class="saySth" placeholder="{{placeholder}}" confirm-type="send" bindconfirm="sendComment" focus='{{commentFocus}}' value='{{contentValue}}'     data-replyFatherCommentId='{{replyFatherCommentId}}' data-replyToUserId='{{replyToUserId}}'/>
 </view>
 
 

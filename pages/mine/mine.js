@@ -60,7 +60,7 @@ Page({
           var faceUrl = "../resource/images/noneface.png";
 
           if (userInfo.faceImage != null && userInfo.faceImage != '' && userInfo.faceImage != undefined) {
-            var faceUrl = serverUrl + userInfo.faceImage;
+            var faceUrl =  userInfo.faceImage;
           }
 
           that.setData(
@@ -157,7 +157,7 @@ Page({
           var userInfo = res.data.data;
           var faceUrl = "../resource/images/noneface.png";
           if (userInfo.faceImage != null && userInfo.faceImage != '' && userInfo.faceImage != undefined) {
-            var faceUrl = serverUrl + userInfo.faceImage;
+            var faceUrl = userInfo.faceImage;
           }
           that.setData(
             {
